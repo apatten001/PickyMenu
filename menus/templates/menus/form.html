@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title_head %}Add Menu Item | PickyMenu{% endblock title_head %}
+
+{% block content %}
+    <h1>Add Menu Item</h1>
+        <form method='post'> {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+{%endblock content%}

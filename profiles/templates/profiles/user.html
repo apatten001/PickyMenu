@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title_head %}Profile | {{ block.super }}{% endblock title_head %}
+
+{% block content %}
+    <div>
+        <h1>{{ user.username }}</h1>
+        <p>{% include 'profiles/snippets/follow_form.html' with username=user.username is_following=is_following %}</p>
+
+        <form class="navbar-form" method="GET" action=".">
+            <input type="text" class="form-control" placeholder="Search" name="q" value="{{ request.GET.q }}" >
+            <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+        </span>
+
+    </div>
+
+<hr/>
+    {% if location %}
+        {% for item in location %}
+            <div class="class col-sm-12">
+                <div class="thumbnail">
+                <strong>{{ item.title }} </strong><br/><a href="{{ request.path }}?q={{ item.category }}">{{ item.category }}</a> | <a href="{{ request.path }}?q={{ item.location }}">{{ item.location }}</a>
+                <br><b>Meals</b>
+
+            <ul>
+                {% for rest in item.item_set.all %}
+                    <li style="margin-bottom: 1px">{{ rest.name }}</li><br/>
+                        {% for ing in rest.get_contents %}
+                            <a href="{{ request.path }}?q={{ ing }}">{{ ing }}</a>
+                        {% endfor %}
+                {% endfor %}
+            </ul>
+            </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="lead">No items found</p>
+    {% endif %}
+
+
+
+{% endblock content %}

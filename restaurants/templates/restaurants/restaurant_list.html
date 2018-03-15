@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title_head %}Restaurants | {{ block.super }}{% endblock title_head %}
+
+{% block content %}
+<h1>Restaurant List</h1>
+    <ul class="list-group">
+    {% for obj in object_list %}
+        <li class="list-group-item"><a href="{{ obj.get_absolute_url }}">{{ obj }}</a>  -- {{ obj.location }}</li>
+    {% endfor %}
+    </ul>
+{% endblock content %}
